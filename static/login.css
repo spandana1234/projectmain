@@ -1,0 +1,71 @@
+
+@import url('https://fonts.googleapis.com/css?family=Numans');
+
+
+
+
+.container{
+height: 100%;
+align-content: center;
+}
+
+.card{
+
+`    padding:6px;`
+height: 370px;
+margin-top: auto;
+border-radius: 10px;
+margin-bottom: auto;
+width: 420px;
+
+}
+
+.social_icon span{
+font-size: 60px;
+margin-left: 10px;
+color:hsl(197.3, 44.8%, 45.5%);
+}
+
+.social_icon span:hover{
+color: white;
+cursor: pointer;
+}
+
+.card-header h3{
+color: black;
+text-align: center;
+}
+
+.social_icon{
+position: absolute;
+right: 20px;
+top: -45px;
+}
+
+.input-group-prepend span{
+width: 50px;
+background-color:hsl(197.3, 44.8%, 45.5%);
+color: white;
+border:0 !important;
+}
+
+
+.login_btn{
+color: white;
+background-color:hsl(197.3, 44.8%, 45.5%);
+width: 100px;
+}
+
+
+
+.links{
+color: black;
+}
+.links:hover{
+color:hsl(197, 51%, 28%);
+}
+
+.links a{
+margin-left: 4px;
+
+}

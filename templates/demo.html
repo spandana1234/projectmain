@@ -1,0 +1,28 @@
+<html>
+<body>
+<form method="POST" action="" enctype="multipart/form-data">
+    				 {{ form.hidden_tag() }}
+    <div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+						</div>
+						{{form.name(class="form-control",placeholder="Emp Id")}}
+
+					</div>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-key"></i></span>
+						</div>
+						{{form.password(class="form-control",placeholder="Password")}}
+					</div>
+
+					<div class="form-group">
+						{{form.submit(class="btn float-right login_btn")}}
+					</div>
+				</form>
+
+
+
+
+</body>
+</html>
