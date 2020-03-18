@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Skills</title>
+    <title>Projects</title>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -20,7 +20,21 @@
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+      <style type="text/css">
+            table {
+             border-collapse: collapse;
+             border-spacing: 0;
+             width: 100%;
+             border: 1px solid #ddd;
+           }
 
+           th, td {
+             text-align: left;
+             padding: 8px;
+           }
+
+           tr:nth-child(even){background-color: #f2f2f2}
+           </style>
 </head>
 
 <body>
@@ -34,23 +48,31 @@
 
             <ul class="list-unstyled components">
                  <li>
-                    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                     {% if mng!=None: %}
+                     <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                    {% endif %}
+                    {% if mng==None: %}
+                    <a href="{{ url_for('dashboard1') }}">Dashboard1</a>
+                    {% endif %}
 
                 </li>
                 <li>
-                    <a href="{{ url_for('profile1') }}">Personal Info</a>
+                    <a href="{{ url_for('profile1') }}">Edit Personal Info</a>
 
                 </li>
                 <li>
+                    {% if mng!=None: %}
                     <a href="{{ url_for('skills') }}">Skills</a>
+                    {% endif %}
+                    {% if mng==None: %}
+                    <a href="{{ url_for('skills1') }}">My team</a>
+                    {% endif %}
                 </li>
                 <li>
                     <a href="#">Projects</a>
 
                 </li>
-                <li>
-                    <a href="{{ url_for('search') }}">Search</a>
-                </li>
+
                 <li>
                     <a href="{{ url_for('resetpass') }}">Reset Password</a>
                 </li>
@@ -129,21 +151,7 @@
         </div> <!-- card-body -->
         </div> <!-- card -->
         <br>
-        <style type="text/css">
-            table {
-             border-collapse: collapse;
-             border-spacing: 0;
-             width: 100%;
-             border: 1px solid #ddd;
-           }
 
-           th, td {
-             text-align: left;
-             padding: 8px;
-           }
-
-           tr:nth-child(even){background-color: #f2f2f2}
-           </style>
 
                   <div >
 
@@ -178,7 +186,7 @@
 
 
 
-</form>
+           </form>
 
         </div>
         </div>

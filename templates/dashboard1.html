@@ -1,0 +1,226 @@
+<html>
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title> Dashboard</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
+    <!-- <link rel="stylesheet" href="skills.css"> -->
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+ <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+       <script type="text/javascript">
+
+    google.charts.load("current", {packages:["bar"]});
+
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data5 = google.visualization.arrayToDataTable([
+         {% for key, value in data5.items() %}
+            {% if value is string %}
+               ['{{ key }}', '{{ value }}'],
+            {% else %}
+               ['{{ key }}', {{ value }}],
+            {% endif %}
+         {% endfor %}
+        ]);
+                var options = {
+          chart: {
+            title: 'Avg rating in each skill'
+
+          },
+          bars: 'vertical'
+                    // Required for Material Bar Charts.
+        };
+        var chart = new google.charts.Bar(document.getElementById('barchart1_material'));
+        chart.draw(data5, google.charts.Bar.convertOptions(options));
+      }
+    </script>
+
+  </head>
+  <body>
+  <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                           <a href="https://enquero.com/" target="_blank" ><img src="{{url_for('static',filename='enquero_logo.png')}}" style="width:190px;height:45px;" alt="img"></a>
+            </div>
+
+            <ul class="list-unstyled components">
+              <li style="background-color:white;color:hsla(197, 49%, 43%, 1);">
+                <a href="#">Dashboard1</a>
+
+            </li>
+            <li>
+                <a href="{{ url_for('profile1') }}">Edit Personal Info</a>
+
+            </li>
+            <li>
+                     {% if mng!=None: %}
+                <a href="{{ url_for('skills') }}">Skills</a>
+                {% endif %}
+                {% if mng==None: %}
+                <a href="{{ url_for('skills1') }}">My team</a>
+                {% endif %}
+            </li>
+
+
+            <li>
+                <a href="{{ url_for('resetpass') }}">Reset Password</a>
+            </li>
+        </ul>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                        <span>Toggle Sidebar</span>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a href="{{ url_for('logout') }}" class="btn btn-primary">Logout</a>
+                            </li>
+
+
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <hr>
+
+
+
+
+
+
+   <div class="card">
+     <div class="card-header">Dashboard</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                           <body>
+                            <p>Average Rating of my team</p>
+                                <div id='myChart1'><a class="zc-ref" href="https://www.zingchart.com/"></a></div>
+                                <script>
+    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"];
+    window.feed = function(callback) {
+      var tick = {};
+      tick.plot0 = {{rat}};
+      callback(JSON.stringify(tick));
+    };
+
+    var myConfig = {
+      type: "gauge",
+      globals: {
+        fontSize: 15
+      },
+      plotarea: {
+        marginTop: 80
+      },
+      plot: {
+        size: '100%',
+        valueBox: {
+          placement: 'center',
+          text: '%v', //default
+          fontSize: 25
+        }
+      },
+      tooltip: {
+        borderRadius: 4
+      },
+      scaleR: {
+        aperture: 180,
+        minValue: 0,
+        maxValue: 5,
+        step: 0.1,
+        center: {
+          visible: false
+        },
+        tick: {
+          visible: false
+        },
+        item: {
+          offsetR: 0,
+          rules: [{
+            rule: '%i == 9',
+            offsetX: 10
+          }]
+        },
+        ring: {
+          size: 40,
+          rules: [{
+              rule: '%v <= {{rat}}',
+              backgroundColor: '#E53935'
+            },
+            {
+              rule: '%v >={{rat}}',
+              backgroundColor: '#f6eaec'
+            }
+          ]
+        }
+      },
+      refresh: {
+        type: "feed",
+        transport: "js",
+        url: "feed()",
+        interval: 1500,
+        resetTimeout: 1000
+      },
+      series: [{
+        values: [0], // starting value
+        backgroundColor: 'black',
+        indicator: [10, 10, 10, 10, 0.75],
+        animation: {
+          effect: 2,
+          method: 1,
+          sequence: 4,
+          speed: 900
+        },
+      }]
+    };
+
+    zingchart.render({
+      id: 'myChart1',
+      data: myConfig,
+      height:"350px",
+      width: '80%'
+    });
+  </script>
+                            </body>
+                           </div>
+                        <div class="row">
+
+                            <div class="col-md-6 col-sm-12">
+
+                            <div id="barchart1_material" style="width: 400px; height: 350px;"></div>
+
+
+                       </div>
+                      </div>
+                      </div>
+                    </div>
+                </div>
+   </div>
+
+  </body>
+</html>

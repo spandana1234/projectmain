@@ -1,7 +1,5 @@
 {% if 'user' in session %}
-
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,32 +27,25 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>Hello User</h3>
+                           <a href="https://enquero.com/" target="_blank" ><img src="{{url_for('static',filename='enquero_logo.png')}}" style="width:190px;height:45px;" alt="img"></a>
             </div>
 
-            <ul class="list-unstyled components">
+             <ul class="list-unstyled components">
                 <li>
-                    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                    <a href="{{ url_for('adminprofile') }}">Dashboard</a>
 
                 </li>
-                <li>
-                    <a href="{{ url_for('profile1') }}">Personal Info</a>
 
-                </li>
-                <li>
-                    <a href="{{ url_for('skills') }}">Skills</a>
-                </li>
-                <li>
-                    <a href="{{ url_for('projects') }}">Projects</a>
-
-                </li>
-                <li>
+                <li style="background-color:white;color:hsla(197, 49%, 43%, 1);">
                     <a href="#">Search</a>
                 </li>
                 <li>
-                    <a href="{{ url_for('resetpass') }}">Reset Password</a>
+                    <a href="{{ url_for('adduser') }}">Add User</a>
                 </li>
             </ul>
+
+
+
         </nav>
 
         <!-- Page Content  -->
@@ -74,7 +65,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item active">
-<a href="{{ url_for('logout') }}" class="btn btn-primary">Logout</a>                            </li>
+                 <a href="{{ url_for('logout') }}" class="btn btn-primary">Logout</a>                            </li>
 
 
                         </ul>
@@ -103,8 +94,11 @@
 
         <div class="col-md-4 col-sm-12">
           <div class="form-group">
-            <label  class="">Client</label>
-              {{form.clients1(class="form-control")}}
+          <label>
+                Currently in a project
+             </label>
+
+                 {{form.pro1(class="form-control")}}
 
           </div>
         </div>
@@ -144,8 +138,8 @@
                 <label >
                    Location
                 </label>
-{{form.loc1(class="form-control")}}
-        </div>
+             {{form.loc1(class="form-control")}}
+         </div>
 
         </div>
 
@@ -153,16 +147,7 @@
 
         </div>
 
-        <div class="row">
-        <div class="col-md-4 col-sm-12">
-          <div class="form-group">
-            <label>
-                Currently in a project
-             </label>
 
-                 {{form.pro1(class="form-control")}}
-          </div></div>
-        </div>
 
             <div style="text-align:right; width=100%;padding:0;">
                {{form.search(class="btn btn-primary")}}
@@ -201,8 +186,7 @@
                                           <th>In a Project</th>
                                           <th>Location</th>
                                            <th>Gender</th>
-                                               <th>Client</th>
-                                                <th>Rating</th>
+                                          <th>Rating</th>
                                           <th>Skill</th>
                                             </tr>
                                    </thead>
@@ -218,9 +202,9 @@
                                            <td>{{result[6]}}</td>
                                            <td>{{result[7]}}</td>
                                            <td>{{result[8]}}</td>
+
                                            <td>{{result[12]}}</td>
                                            <td>{{result[13]}}</td>
-                                           <td>{{result[14]}}</td>
 
                                        </tr>
                                     {% endfor %}

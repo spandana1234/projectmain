@@ -27,7 +27,7 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>Hello User</h3>
+                          <a href="https://enquero.com/" target="_blank" ><img src="{{url_for('static',filename='enquero_logo.png')}}" style="width:190px;height:45px;" alt="img"></a>
             </div>
 
             <ul class="list-unstyled components">
@@ -40,15 +40,15 @@
 
                 </li>
                 <li>
+                   {% if mng!=None: %}
                     <a href="#">Skills</a>
+                    {% endif %}
+                    {% if mng==None: %}
+                    <a href="#">My team</a>
+                    {% endif %}
                 </li>
-                <li>
-                    <a href="#">Projects</a>
 
-                </li>
-                <li>
-                    <a href="#">Search</a>
-                </li>
+
                 <li>
                     <a href="#">Reset Password</a>
                 </li>
@@ -118,10 +118,10 @@
         <div class="col-md-4 col-sm-12">
         <div class="form-group">
             <label>
-                Experience(years)
-              </label>
+                    Gender
+                 </label>
 
-               {{form.exp(class="form-control")}}
+                    {{form.select4(class="form-control")}}
 
 
             </div>
@@ -130,16 +130,7 @@
 
         <div class="col-md-4 col-sm-12">
         <div class="form-group">
-            <label>Practice</label>
-
-            {{form.select1(class="form-control")}}
-        </div>
-
-        </div>
-
-        <div class="col-md-4 col-sm-12">
-        <div class="form-group">
-                <label>
+             <label>
                    Enquero Joining Date:
                 </label>
 
@@ -147,10 +138,8 @@
         </div>
 
         </div>
-
-
-
         </div>
+                   <hr>
 
         <div class="row">
         <div class="col-md-4 col-sm-12">
@@ -174,13 +163,25 @@
 
             <div class="col-md-4 col-sm-12">
               <div class="form-group">
-                <label>
-                    Gender
-                 </label>
+                   <label>
+                Experience(years)
+              </label>
 
-                    {{form.select4(class="form-control")}}
+               {{form.exp(class="form-control")}}
+
               </div></div>
         </div>
+                   <div class="row">
+                    <div class="col-md-4 col-sm-12">
+        <div class="form-group">
+             <label>Practice</label>
+
+            {{form.select1(class="form-control")}}
+
+        </div>
+
+                    </div></div>
+                   <hr>
 
             <div class="row">
         <div class="col-md-4 col-sm-12">

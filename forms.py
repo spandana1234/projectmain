@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, SelectField, DateField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired,Email,Length,EqualTo
 
 
 class LoginForm(FlaskForm):
@@ -18,11 +18,11 @@ class AdminLoginForm(FlaskForm):
 class ProfileForm(FlaskForm):
     fname = StringField(validators=[DataRequired()])
     lname = StringField(validators=[DataRequired()])
-    email = StringField(validators=[DataRequired()])
+    email = StringField(validators=[DataRequired(),Email()])
     exp = StringField(validators=[DataRequired()])
-    practices = [('Data Engineering', 'Data Engineering'),
-                 ('Web developer', 'Web developer'),
-                 ('Frontend Developer', 'Frontend Developer'),
+    practices = [('DataEngineering', 'Data Engineering'),
+                 ('Webdeveloper', 'Web developer'),
+                 ('FrontendDeveloper', 'Frontend Developer'),
                  ('Oracle', 'Oracle'),
                  ('Anaplan', 'Anaplan')]
     select1 = SelectField(choices=practices)
@@ -73,18 +73,9 @@ class ResetpassForm(FlaskForm):
 
 
 class SearchForm(FlaskForm):
-    skills=[('%','Select'),
-            ('Javascript','Javascript'),
-            ('React','React'),
-            ('SQL','SQL'),
-            ('Angular','Angular')]
+    skills=[('%','Select'),('Java','Java'),('Python','Python'),('C++','C++'),('Java Script','Java Script'),
+            ('SQL','SQL'),('c#','c#'),('Scala','Scala')]
     skills1=SelectField(choices=skills)
-    clients=[('%','Select'),('Driscolls','Driscolls'),
-            ('Atlassian','Atlassian'),
-            ('VMWare','VMWare'),
-            ('Groupon','Groupon'),
-            ('Cisco','Cisco')]
-    clients1=SelectField(choices=clients)
     Exp=[('%','Select'),('1','1'),('2','2'),('3','3'),('4','4'),('5','5')]
     exp1=SelectField(choices=Exp)
     rating= [('%','Select'),('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5')]
@@ -123,3 +114,9 @@ class ProjectForm(FlaskForm):
                ('e', 'e')]
     manager1=SelectField(choices=manager)
     search = SubmitField('Add')
+
+class AdminRegistrationForm(FlaskForm):
+    empid = StringField( validators=[DataRequired()])
+    password = PasswordField( validators=[DataRequired()])
+    manager = StringField( validators=[DataRequired()])
+    submit = SubmitField('Add User')

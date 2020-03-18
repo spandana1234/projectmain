@@ -19,7 +19,125 @@
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+         <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+    <script type="text/javascript">
 
+    google.charts.load("current", {packages:["bar"]});
+
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data1 = google.visualization.arrayToDataTable([
+         {% for key, value in data1.items() %}
+            {% if value is string %}
+               ['{{ key }}', '{{ value }}'],
+            {% else %}
+               ['{{ key }}', {{ value }}],
+            {% endif %}
+         {% endfor %}
+        ]);
+                var options = {
+                    width:400,
+          chart: {
+            title: 'Ratings of each skill'
+
+          },
+          bars: 'vertical',
+          //
+                    // Required for Material Bar Charts.
+        };
+        var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+        chart.draw(data1, google.charts.Bar.convertOptions(options));
+      }
+    </script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages': ['corechart','bar']});
+      google.charts.setOnLoadCallback(drawChart1);
+
+
+      function drawChart1() {
+          var data3 = google.visualization.arrayToDataTable([
+              ['skill','Your rating','Enquero avg rating'],
+
+              {% for i in n%}
+              ['{{data3[i][0]}}','{{data3[i][1]}}' ,'{{data3[i][2]}}'],
+
+                  {%endfor%}
+          ]);
+          var materialOptions = {
+          width: 500,
+          chart: {
+            title: 'Your rating vs Avg rating',
+
+          },
+          series: {
+            0: { axis: 'Rating' }, // Bind series 0 to an axis named 'distance'.
+            1: { axis: 'Average rating' } // Bind series 1 to an axis named 'brightness'.
+          },
+          axes: {
+            y: {
+              distance: {label: 'rating1'}, // Left y-axis.
+              brightness: {side: 'right', label: 'rating2'} // Right y-axis.
+            }
+          },
+
+
+          series: {
+            0: {targetAxisIndex: 0},
+            1: {targetAxisIndex: 1}
+          },
+          title: 'Your rating vs Avg rating',
+          vAxes: {
+            // Adds titles to each axis.
+            0: {title: 'Your rating'},
+            1: {title: 'Enquero avg rating'}
+          },
+
+
+              bars: 'vertical'
+
+                       // Required for Material Bar Charts.
+        };
+
+
+        var chart = new google.charts.Bar(document.getElementById('barchart1_material'));
+
+        chart.draw(data3, google.charts.Bar.convertOptions(materialOptions));
+      }
+    </script>
+
+     <style>
+    html,
+    body {
+      height: 100%;
+      width: 100%;
+    }
+
+    #myChart {
+      height: 100%;
+      width: 100%;
+      min-height: 150px;
+    }
+
+    .zc-ref {
+      display: none;
+    }
+  </style>
+     <style type="text/css">
+            table {
+             border-collapse: collapse;
+             border-spacing: 0;
+             width: 100%;
+             border: 1px solid #ddd;
+           }
+
+           th, td {
+             text-align: left;
+             padding: 8px;
+           }
+
+           tr:nth-child(even){background-color: #f2f2f2}
+           </style>
 </head>
 
 <body>
@@ -28,28 +146,28 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>Hello User</h3>
+                              <a href="https://enquero.com/" target="_blank" ><img src="{{url_for('static',filename='enquero_logo.png')}}" style="width:190px;height:45px;" alt="img"></a>
             </div>
 
             <ul class="list-unstyled components">
-                 <li>
+                 <li style="background-color:white;color:hsla(197, 49%, 43%, 1);">
                     <a href="#">Dashboard</a>
 
                 </li>
                 <li>
-                    <a href="{{ url_for('profile1') }}">Personal Info</a>
+                    <a href="{{ url_for('profile1') }}">Edit Personal Info</a>
 
                 </li>
                 <li>
-                    <a href="{{ url_for('skills') }}">Skills</a>
+                  {% if mng!=None: %}
+                  <a href="{{ url_for('skills') }}">Skills</a>
+                  {% endif %}
+                  {% if mng==None: %}
+                  <a href="{{ url_for('skills1') }}">My team</a>
+                  {% endif %}
                 </li>
-                <li>
-                    <a href="{{ url_for('projects') }}">Projects</a>
 
-                </li>
-                <li>
-                    <a href="{{ url_for('search') }}">Search</a>
-                </li>
+
                 <li>
                     <a href="{{ url_for('resetpass') }}">Reset Password</a>
                 </li>
@@ -81,72 +199,168 @@
                     </div>
                 </div>
             </nav>
-            <h3>Dashboard</h3>
+
             <hr>
-            <div class="elements">
-            <div class="row" >
 
-                <div class="col-md-3 col-sm-12">
-               <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
-                <!-- <div class="card-header">My Profile</div> -->
-                <div class="card-body"><h3>My Profile</h3>
+       <body>
+                 <div class="card">
+                     <div class="card-header">Dashboard</div>
 
-                  <!-- <h5 class="card-title">Primary card title</h5> -->
-                </div>
-                <div id="xy" class="card-footer"> <a href="{{ url_for('profile1') }}" class="block-anchor panel-footer">Full Details <i class="fa fa-arrow-right"></i></a></div>
-              </div></div>
-              <div class="col-md-3 col-sm-12">
-              <div class="card text-white  mb-3" style="max-width: 18rem; background:#df6b17">
+                <div class="card-body">
 
-                <div class="card-body"><h3>My Skills</h3></div>
-                  <!-- <h5 class="card-title">Secondary card title</h5> -->
-                  <div id="yz" class="card-footer"><a href="{{ url_for('skills') }}" class="block-anchor panel-footer">See all <i class="fa fa-arrow-right"></i></a>
+    Average rating of all skills
+  <div id='myChart'><a class="zc-ref" href="https://www.zingchart.com/"></a></div>
 
-                </div>
-            </div>
-            </div>
+  <script>
+    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"];
+    window.feed = function(callback) {
+      var tick = {};
+      tick.plot0 = {{rating}};
+      callback(JSON.stringify(tick));
+    };
+
+    var myConfig = {
+      type: "gauge",
+      globals: {
+        fontSize: 15
+      },
+      plotarea: {
+        marginTop: 80
+      },
+      plot: {
+        size: '100%',
+        valueBox: {
+          placement: 'center',
+          text: '%v', //default
+          fontSize: 25
+        }
+      },
+      tooltip: {
+        borderRadius: 4
+      },
+      scaleR: {
+        aperture: 180,
+        minValue: 0,
+        maxValue: 5,
+        step: 0.1,
+        center: {
+          visible: false
+        },
+        tick: {
+          visible: false
+        },
+        item: {
+          offsetR: 0,
+          rules: [{
+            rule: '%i == 9',
+            offsetX: 10
+          }]
+        },
+        ring: {
+          size: 40,
+          rules: [{
+              rule: '%v <= {{rating}}',
+              backgroundColor: '#E53935'
+            },
+            {
+              rule: '%v > ={{rating}}',
+              backgroundColor: '#f6eaec'
+            }
+          ]
+        }
+      },
+      refresh: {
+        type: "feed",
+        transport: "js",
+        url: "feed()",
+        interval: 1500,
+        resetTimeout: 1000
+      },
+      series: [{
+        values: [0], // starting value
+        backgroundColor: 'black',
+        indicator: [10, 10, 10, 10, 0.75],
+        animation: {
+          effect: 2,
+          method: 1,
+          sequence: 4,
+          speed: 900
+        },
+      }]
+    };
+
+    zingchart.render({
+      id: 'myChart',
+      data: myConfig,
+      height: '350px',
+      width: '80%',
+
+    });
+  </script>
+</body>
+                    <hr>
+                    <br>
 
 
+            <div class="row">
+
+                        <div class="col-md-6 col-sm-12">
+
+                            <p> <b>Employees with similar skills</b></p>
+                            <br>
+                            <table class="table table-bordered">
+                                   <thead>
+                                      <tr>
+                                           <th>Emp ID</th>
+                                           <th>Name</th>
+
+                                            </tr>
+                                   </thead>
+                                   <tbody>
+                                    {% for row in sk %}
+                                       <tr>
+
+                                           <td>{{row[0]}}</td>
+                                           <td>{{row[1]}}</td>
 
 
+                                       </tr>
+
+                                    {% endfor %}
+                                    </tbody>
+                       </table>
+
+                        </div></div>
+
+                            <br><br>
+
+                    <div class="row">
+
+                        <div class="col-md-6 col-sm-12">
 
 
+                                <div id="barchart_material" style="width: 400px; height: 350px;"></div>
 
-
-
-                            </div>
                         </div>
 
+                     <div class="col-md-6 col-sm-12">
+
+
+                            <div id="barchart1_material" style="width: 100%; height: 100%;"></div>
+
                     </div>
+                        </div>
+                    <hr>
+                    <br>
+
+
+
                 </div>
-            </div>
+                 </div>
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        </div>
-		</div>
 
 
 
@@ -160,7 +374,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
     <script>
-
 
 
 $(document).ready(function () {

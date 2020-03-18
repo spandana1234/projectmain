@@ -16,10 +16,25 @@
     <!-- <link rel="stylesheet" href="skills.css"> -->
     <!-- Scrollbar Custom CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+ <style type="text/css">
+            table {
+             border-collapse: collapse;
+             border-spacing: 0;
+             width: 100%;
+             border: 1px solid #ddd;
+           }
+
+           th, td {
+             text-align: left;
+             padding: 8px;
+           }
+
+           tr:nth-child(even){background-color: #f2f2f2}
+           </style>
 
 </head>
 
@@ -29,28 +44,27 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>Hello User</h3>
+                             <a href="https://enquero.com/" target="_blank" ><img src="{{url_for('static',filename='enquero_logo.png')}}" style="width:190px;height:45px;" alt="img"></a>
             </div>
 
             <ul class="list-unstyled components">
                 <li>
-                    <a href="{{ url_for('dashboard') }}">Dashboard</a>
-
+                    {% if mng!=None: %}
+                     <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                    {% endif %}
+                    {% if mng==None: %}
+                    <a href="{{ url_for('dashboard1') }}">Dashboard1</a>
+                    {% endif %}
                 </li>
                 <li>
-                    <a href="{{ url_for('profile1') }}">Personal Info</a>
+                    <a href="{{ url_for('profile1') }}">Edit Personal Info</a>
 
                 </li>
-                <li>
+                <li style="background-color:white;color:hsla(197, 49%, 43%, 1);">
                     <a href="#">Skills</a>
                 </li>
-                <li>
-                    <a href="{{ url_for('projects') }}">Projects</a>
 
-                </li>
-                <li>
-                    <a href="{{ url_for('search') }}">Search</a>
-                </li>
+
                 <li>
                     <a href="{{ url_for('resetpass') }}">Reset Password</a>
                 </li>
@@ -74,7 +88,8 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item active">
-<a href="{{ url_for('logout') }}" class="btn btn-primary">Logout</a>                            </li>
+                            <a href="{{ url_for('logout') }}" class="btn btn-primary">Logout</a>
+                            </li>
 
 
                         </ul>
@@ -84,110 +99,99 @@
             <div class="card">
                 <div class="card-header">Skills</div>
                 <div class="card-body">
-                    <form id="myForm" method="POST"  action=""  autocomplete="off" enctype="multipart/form-data" onSubmit="clearField();">
+                    <form id="myForm" method="POST"  action="{{url_for('add')}}"  autocomplete="off" enctype="multipart/form-data">
                     {{form.hidden_tag()}}
+                        <div class="card">
 
+                    <div class="card-body">
+                        <div class="row">
+                      <div class="col-md-4 col-sm-12">
+                          <div class="form-group">
+                             <label>Skills</label>
+                            {{form.select1(class="form-control")}}
+                        </div>
+                      </div>
 
-
-
-
-            <div class="row">
-                <div class="col-md-4 col-sm-12">
-                  <div class="form-group">
-                         <label>Skills</label>
-
-                                              {{form.select1(class="form-control")}}
-
-
-                  </div>
-                </div>
-
-                <div class="col-md-4 col-sm-12">
-                  <div class="form-group">
-                    <label class="">Rating</label>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                        <label>Rating</label>
                                         {{form.select2(class="form-control")}}
-
-
-                  </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                   {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                  {{ message }}
                 </div>
+              {% endfor %}
+            {% endif %}
+			{% endwith %}
 
-                <div class="col-md-4  col-sm-12">
-                  <div class="form-group">
+                            </div>
 
-                    {{form.submit(class="btn btn-primary")}}
+                        <div class="col-md-4 col-sm-12">
+                                 <div class="form-group">
+                                     {{form.submit(class="btn btn-primary")}}
 
-                  </div>
-                </div></div>
+                                </div>
+                             </div>
+                        </div>
 
-                    </form></div> <!-- card-body -->
-        </div> <!-- card -->
-        <br>
-        <style type="text/css">
-            table {
-             border-collapse: collapse;
-             border-spacing: 0;
-             width: 100%;
-             border: 1px solid #ddd;
-           }
-
-           th, td {
-             text-align: left;
-             padding: 8px;
-           }
-
-           tr:nth-child(even){background-color: #f2f2f2}
-           </style>
-
-                  <div >
-
+                </div> <!-- card-body -->
+                  </div> <!-- card -->
+                    </form>
+               <br>
+                    <div>
+                     <form  method="POST"  action="{{url_for('delete')}}"  autocomplete="off">
                        <table class="table table-bordered">
                                    <thead>
                                       <tr>
+
                                            <th>Skill</th>
                                            <th>Rating</th>
-                                           <th>Edit</th>
+                                          <th>Delete</th>
 
                                             </tr>
                                    </thead>
-                                   <tbody>
+                                    <tbody>
                                    {% for row in value %}
-                                       <tr>
+                                       <tr id={{"row"+loop.index|string}}>
+                                            {% set y = loop.index|string %}
 
-                                           <td>{{row[0]}}</td>
-                                           <td>{{row[1]}}</td>
-                                            <td><button>Edit</button></td>
+                                           <td id={{"name_row"+loop.index|string}}>{{row[0]}}</td>
+                                           <td>{{row[1]}} </td>
+<!--                                           <select id={{"rate_text"+loop.index|string}} name="rate{{y}}" class="form-control" disabled='true'>-->
+<!--                                            <option value='1'  {% if row[1] =='1' %} selected="selected" {% endif %}>1</option>-->
+<!--                                            <option value='2' {% if row[1] =='2' %} selected="selected" {% endif %}>2</option>-->
+<!--                                                <option value='3'{% if row[1]=='3' %} selected="selected" {% endif %}>3</option>-->
+<!--                                                <option value='4' {% if row[1] =='4' %} selected="selected" {% endif %}>4</option>-->
+<!--                                                <option value='5' {% if row[1] =='5' %} selected="selected" {% endif %}>5</option></select>-->
+<!--                                           </td>-->
 
+<!--                                                <button  id={{"edit_button"+loop.index|string}} class="btn btn-primary edit "   onclick="edit_row({{loop.index|string}})" value="{{y}}" name="x">Edit</button>-->
+<!--                                           <button id={{"save_button"+loop.index|string}} class="btn btn-primary "  onclick="save_row({{loop.index|string}})" value="{{y}}" name="z" style="display:none;">Save</button>-->
+                                           <td>
+                                           <button value="{{y}}" class="btn btn-primary" name="dlt"  onclick="delete_row({{loop.index|string}})">Delete</button>
+
+                                       </td>
                                        </tr>
+
                                     {% endfor %}
 
-                                    </tbody>
+                                       </tbody>
                        </table>
-                     </div>
 
+                      <a href="{{ url_for('edit') }}"  class="btn btn-primary">Edit</a>
 
-
-
-
-
-
-
-
+                  </form>   </div>
+                    </div>
         </div>
-        </div>
-
-
-
-    </div>
-    </div>
-
-
-
-
-
-
-
-
-
+</div>
+</div>
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <!-- Popper.JS -->
@@ -198,9 +202,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
     <script>
-
-
-
 $(document).ready(function () {
             $("#sidebar").mCustomScrollbar({
                 theme: "minimal"
@@ -212,7 +213,30 @@ $(document).ready(function () {
                 $('a[aria-expanded=true]').attr('aria-expanded', 'false');
             });
         });
-    </script>
+<!--function edit_row(no)-->
+<!--{-->
+<!--document.getElementById("edit_button"+no).style.display='none';-->
+<!--document.getElementById("save_button"+no).style.display='block';-->
+<!--document.getElementById("rate_text"+no).disabled=false;-->
+<!--debugger;-->
+<!--}-->
+
+
+
+
+<!--function save_row(no)-->
+<!--{-->
+<!-- document.getElementById("save_button"+no).style.display="none";-->
+<!-- document.getElementById("edit_button"+no).style.display="block";-->
+<!--  document.getElementById("rate_text"+no).disabled=true;-->
+<!--}-->
+<!--function delete_row(no)-->
+<!--{-->
+<!-- document.getElementById("row"+no).outerHTML="";-->
+
+<!--}-->
+
+</script>
 </body>
 
 </html>

@@ -1,3 +1,4 @@
+{% if 'user' in session %}
 <!DOCTYPE html>
 <html>
 
@@ -6,19 +7,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>UserLogin</title>
+    <title>Skills</title>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+    <!-- <link rel="stylesheet" href="skills.css"> -->
     <!-- Scrollbar Custom CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+   <style type="text/css">
+            table {
+             border-collapse: collapse;
+             border-spacing: 0;
+             width: 100%;
+             border: 1px solid #ddd;
+           }
+
+           th, td {
+             text-align: left;
+             padding: 4px;
+           }
+
+            tr:nth-child(even){background-color: #f2f2f2}
+           </style>
 
 </head>
 
@@ -28,19 +45,30 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                            <a href="https://enquero.com/" target="_blank" ><img src="{{url_for('static',filename='enquero_logo.png')}}" style="width:190px;height:45px;" alt="img"></a>
+                <a href="https://enquero.com/" target="_blank" ><img src="{{url_for('static',filename='enquero_logo.png')}}" style="width:190px;height:45px;" alt="img"></a>
             </div>
 
             <ul class="list-unstyled components">
-                 <li style="background-color:white;color:hsla(197, 49%, 43%, 1);">
-                    <a href="{{ url_for('login') }}">User login</a>
+                <li>
+                   {% if mng!=None: %}
+                     <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                    {% endif %}
+                    {% if mng==None: %}
+                    <a href="{{ url_for('dashboard1') }}">Dashboard1</a>
+                    {% endif %}
 
                 </li>
                 <li>
-                    <a href="{{url_for('adminlogin')}}">Admin Login</a>
+                    <a href="{{ url_for('profile1') }}">Edit Personal Info</a>
 
                 </li>
+                <li style="background-color:white;color:hsla(197, 49%, 43%, 1);">
+                    <a href="#">My team</a>
+                </li>
 
+                <li>
+                    <a href="{{ url_for('resetpass') }}">Reset Password</a>
+                </li>
             </ul>
         </nav>
 
@@ -58,64 +86,60 @@
                         <i class="fas fa-align-justify"></i>
                     </button>
 
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active">
+               <a href="{{ url_for('logout') }}" class="btn btn-primary">Logout</a>
+                            </li>
 
+
+                        </ul>
+                    </div>
                 </div>
             </nav>
-<div class="container">
-	<div class="d-flex justify-content-center h-100">
-		<div class="card">
-			<div class="card-header">
-				<h3>Forgot Password</h3>
-
-			</div>
-			<div class="card-body">
-				<form  method="POST" action="" autocomplete="off"  enctype="multipart/form-data">
-    				 {{ form.hidden_tag() }}
-                       {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-              {% for category, message in messages %}
-                <div class="alert alert-{{ category }}">
-                  {{ message }}
-                </div>
-              {% endfor %}
-            {% endif %}
-			{% endwith %}
-					<div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fa fa-user" aria-hidden="true"></i>
-                            </span>
-						</div>
-						{{form.empid(class="form-control",placeholder="Emp Id")}}
-					</div>
-                    <div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-question"></i></span>
-						</div>
-						{{form.select1(class="form-control")}}
-					</div>
-                    <div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-keyboard"></i></span>
-						</div>
-						{{form.ans(class="form-control",placeholder="Enter the answer")}}
-					</div>
-
-					<div class="form-group">
-						{{form.submit(class="btn float-right login_btn")}}
-					</div>
-
-					<div class="form-group">
-						<a href="{{ url_for('login') }}" class="btn float-left login_btn">Back</a>
-                    </div>
+            <div class="card">
+                <div class="card-header">Team Members</div>
+                <div class="card-body">
 
 
-				</form>
-			</div>
-		</div>
-	</div>
-</div>
+
+                  <div >
+
+                       <table class="table table-bordered">
+                                   <thead>
+                                      <tr>
+                                           <th>Empid</th>
+                                          <th>Name</th>
+                                           <th>Rate</th>
+                                      </tr>
+                                   </thead>
+                                   <tbody>
+                                   {% for row in value %}
+                                       <tr>
+
+                                           <td>{{row[0]}}</td>
+                                           <td>{{row[1]}}</td>
+                                            <td><a href="{{ url_for('rate',var=row[0]) }}"  class="btn btn-primary">Rate</a></td>
+
+
+                                       </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                       </table>
+                     </div>
+
+
+
+                 </div> <!-- card-body -->
+        </div> <!-- card -->
+
+
         </div>
     </div>
+
+
+
 
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -145,3 +169,4 @@ $(document).ready(function () {
 </body>
 
 </html>
+{% endif %}

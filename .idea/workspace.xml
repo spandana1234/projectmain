@@ -1,7 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="093025ac-0102-4d68-be5a-b8ae7db7dbd0" name="Default Changelist" comment="" />
+    <list default="true" id="093025ac-0102-4d68-be5a-b8ae7db7dbd0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app1.py" beforeDir="false" afterPath="$PROJECT_DIR$/app1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/profile.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/adminlogin.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/adminlogin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/adminprofile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/adminprofile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/demo.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/demo1.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/forgotpassword.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/forgotpassword.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/profile1.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/profile1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/projects.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/reset.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/reset.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/resetpass.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/resetpass.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/search.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/signup.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/skills.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/skills.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,7 +40,11 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1YFuRjjx0xWkxy2TY8h4zYcXsnn" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -26,6 +53,7 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
@@ -142,54 +170,62 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="361" y="0" key="#app" timestamp="1582605100192">
+    <state x="233" y="0" key="#Inspections" timestamp="1584182562738">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="361" y="0" key="#app/0.0.1280.680@0.0.1280.680" timestamp="1582605100192" />
+    <state x="233" y="0" key="#Inspections/0.0.1280.680@0.0.1280.680" timestamp="1584182562738" />
+    <state x="361" y="0" key="#app" timestamp="1584351279493">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="361" y="0" key="#app/0.0.1280.680@0.0.1280.680" timestamp="1584351279493" />
     <state x="409" y="145" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1583127964353">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="409" y="145" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1280.680@0.0.1280.680" timestamp="1583127964353" />
-    <state width="1259" height="201" key="GridCell.Tab.0.bottom" timestamp="1583904092797">
+    <state width="1259" height="93" key="GridCell.Tab.0.bottom" timestamp="1584510072282">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="201" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1583904092797" />
-    <state width="1259" height="201" key="GridCell.Tab.0.center" timestamp="1583904092796">
+    <state width="1259" height="93" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1584510072282" />
+    <state width="1259" height="93" key="GridCell.Tab.0.center" timestamp="1584510072282">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="201" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1583904092796" />
-    <state width="1259" height="201" key="GridCell.Tab.0.left" timestamp="1583904092796">
+    <state width="1259" height="93" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1584510072282" />
+    <state width="1259" height="93" key="GridCell.Tab.0.left" timestamp="1584510072282">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="201" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1583904092796" />
-    <state width="1259" height="201" key="GridCell.Tab.0.right" timestamp="1583904092797">
+    <state width="1259" height="93" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1584510072282" />
+    <state width="1259" height="93" key="GridCell.Tab.0.right" timestamp="1584510072282">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="201" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1583904092797" />
-    <state width="1259" height="204" key="GridCell.Tab.1.bottom" timestamp="1583391592116">
+    <state width="1259" height="93" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1584510072282" />
+    <state width="1259" height="204" key="GridCell.Tab.1.bottom" timestamp="1583912166174">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="204" key="GridCell.Tab.1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1583391592116" />
-    <state width="1259" height="204" key="GridCell.Tab.1.center" timestamp="1583391592116">
+    <state width="1259" height="204" key="GridCell.Tab.1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1583912166174" />
+    <state width="1259" height="204" key="GridCell.Tab.1.center" timestamp="1583912166174">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="204" key="GridCell.Tab.1.center/0.0.1280.680@0.0.1280.680" timestamp="1583391592116" />
-    <state width="1259" height="204" key="GridCell.Tab.1.left" timestamp="1583391592116">
+    <state width="1259" height="204" key="GridCell.Tab.1.center/0.0.1280.680@0.0.1280.680" timestamp="1583912166174" />
+    <state width="1259" height="204" key="GridCell.Tab.1.left" timestamp="1583912166174">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="204" key="GridCell.Tab.1.left/0.0.1280.680@0.0.1280.680" timestamp="1583391592116" />
-    <state width="1259" height="204" key="GridCell.Tab.1.right" timestamp="1583391592116">
+    <state width="1259" height="204" key="GridCell.Tab.1.left/0.0.1280.680@0.0.1280.680" timestamp="1583912166174" />
+    <state width="1259" height="204" key="GridCell.Tab.1.right" timestamp="1583912166174">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="204" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1583391592116" />
-    <state x="142" y="0" key="SettingsEditor" timestamp="1582883846623">
+    <state width="1259" height="204" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1583912166174" />
+    <state x="417" y="52" key="RollbackChangesDialog" timestamp="1584370737975">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1582883846623" />
-    <state x="336" y="166" key="com.intellij.ide.util.TipDialog" timestamp="1583385068552">
+    <state x="417" y="52" key="RollbackChangesDialog/0.0.1280.680@0.0.1280.680" timestamp="1584370737975" />
+    <state x="142" y="0" key="SettingsEditor" timestamp="1584368810435">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="336" y="166" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1583385068552" />
+    <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1584368810435" />
+    <state x="336" y="166" key="com.intellij.ide.util.TipDialog" timestamp="1584463170152">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="336" y="166" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1584463170152" />
     <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1583732174664">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
