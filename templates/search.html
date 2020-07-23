@@ -6,6 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>Search</title>
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style="font-size:medium";></script>
+    <script src="http://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -19,7 +26,30 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 
+ <style type="text/css">
+            table {
+
+             border-collapse: collapse;
+             border-spacing: 0;
+             width: 100%;
+             border: 1px solid #ddd;
+           }
+
+           th, td {
+             text-align: left;
+             padding: 8px;
+           }
+
+           tr:nth-child(even){background-color: #f2f2f2}
+           #spa{
+           margin-left:10px;
+           margin-right:10px;
+           }
+
+</style>
 </head>
+
+
 
 <body>
 
@@ -40,7 +70,19 @@
                     <a href="#">Search</a>
                 </li>
                 <li>
-                    <a href="{{ url_for('adduser') }}">Add User</a>
+                    <a href="{{ url_for('adduser') }}">Add Employee</a>
+                </li>
+                  <li>
+                    <a href="{{ url_for('updateuser') }}">Update Manager</a>
+                </li>
+                 <li>
+                    <a href="{{ url_for('deleteuser') }}">Delete Employee</a>
+                </li>
+                   <li>
+                    <a href="{{ url_for('addskill') }}">Add New Skill</a>
+                </li>
+                  <li>
+                    <a href="{{ url_for('skillmatrix') }}">Skill Matrix</a>
                 </li>
             </ul>
 
@@ -78,15 +120,24 @@
                     <form method="POST" action="" autocomplete="off"     enctype="multipart/form-data">
     				 {{ form.hidden_tag() }}
 
-                        <div class="card">
-
-        <div class="card-body">
 
 
+
+            <div class="row">
+                <div class="col-md-4 col-sm-12"></div>
+                 <div class="col-md-4 col-sm-12">
+          <div class="form-group">
+                 <label>Select From</label>
+                    {{form.fil(class="form-control")}}
+
+          </div>
+        </div>
+                <div class="col-md-4 col-sm-12"></div>
+            </div>
         <div class="row">
         <div class="col-md-4 col-sm-12">
           <div class="form-group">
-                 <label class="">Skills</label>
+                 <label>Skills</label>
                     {{form.skills1(class="form-control")}}
 
           </div>
@@ -94,14 +145,17 @@
 
         <div class="col-md-4 col-sm-12">
           <div class="form-group">
-          <label>
-                Currently in a project
-             </label>
+           <label>
+            Min Rating
+            </label>
 
-                 {{form.pro1(class="form-control")}}
-
+               {{form.rating1(class="form-control")}}
           </div>
         </div>
+
+
+
+
 
         <div class="col-md-4  col-sm-12">
           <div class="form-group">
@@ -112,15 +166,17 @@
                 {{form.exp1(class="form-control")}}
           </div>
         </div></div>
-        <div class="row">
 
+<div class="row">
         <div class="col-md-4 col-sm-12">
         <div class="form-group">
-          <label>
-            Rating
-            </label>
+            <label>
+                Currently in a project
+             </label>
 
-               {{form.rating1(class="form-control")}}
+                 {{form.pro1(class="form-control")}}
+
+
             </div>
         </div>
 
@@ -149,33 +205,17 @@
 
 
 
-            <div style="text-align:right; width=100%;padding:0;">
+            <div style="float:right; width=100%;padding:0;">
                {{form.search(class="btn btn-primary")}}
 
         </div>
+                    </form>        </div></div>
 
-        </div> <!-- card-body -->
-        </div> <!-- card -->
         <br>
-        <style type="text/css">
-            table {
-             border-collapse: collapse;
-             border-spacing: 0;
-             width: 100%;
-             border: 1px solid #ddd;
-           }
 
-           th, td {
-             text-align: left;
-             padding: 8px;
-           }
-
-           tr:nth-child(even){background-color: #f2f2f2}
-           </style>
-
-                  <div >
-
-                       <table class="table table-responsive table-bordered">
+                  <div id="spa">
+                    {% if tablet == True %}
+                       <table id="myTable" class="table table-bordered table-responsive">
                                    <thead>
                                       <tr>
                                            <th>Emp ID</th>
@@ -186,8 +226,9 @@
                                           <th>In a Project</th>
                                           <th>Location</th>
                                            <th>Gender</th>
-                                          <th>Rating</th>
+
                                           <th>Skill</th>
+                                          <th>Rating</th>
                                             </tr>
                                    </thead>
                                    <tbody>
@@ -210,7 +251,9 @@
                                     {% endfor %}
 
                                     </tbody>
+
                        </table>
+                      {% endif %}
                      </div>
 
 
@@ -219,15 +262,14 @@
 
 
 
-</form>
+</div>
 
         </div>
-        </div>
 
 
 
-    </div>
-    </div>
+
+
 
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -238,8 +280,8 @@
     <!-- jQuery Custom Scroller CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
-    <script>
 
+    <script>
 
 
 $(document).ready(function () {
@@ -253,6 +295,7 @@ $(document).ready(function () {
                 $('a[aria-expanded=true]').attr('aria-expanded', 'false');
             });
         });
+
     </script>
 </body>
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% if 'user' in session %}
 <html>
 
 <head>
@@ -6,13 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Resetpassword</title>
+    <title>deleteuser</title>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-    <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='login.css') }}">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
     <!-- Scrollbar Custom CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 
@@ -28,35 +27,32 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                             <a href="https://enquero.com/" target="_blank" ><img src="{{url_for('static',filename='enquero_logo.png')}}" style="width:190px;height:45px;" alt="img"></a>
+                              <a href="https://enquero.com/" target="_blank" ><img src="{{url_for('static',filename='enquero_logo.png')}}" style="width:190px;height:45px;" alt="img"></a>
             </div>
 
             <ul class="list-unstyled components">
                 <li>
-                  {% if mng!=None: %}
-                     <a href="{{ url_for('dashboard') }}">Dashboard</a>
-                    {% endif %}
-                    {% if mng==None: %}
-                    <a href="{{ url_for('dashboard1') }}">Dashboard</a>
-                    {% endif %}
+                    <a href="{{ url_for('adminprofile') }}">Dashboard</a>
 
                 </li>
+
                 <li>
-                    <a href="{{ url_for('profile1') }}">Edit Personal Info</a>
-
+                    <a href="{{ url_for('search') }}">Search</a>
                 </li>
-                <li>
-                     {% if mng!=None: %}
-                    <a href="{{ url_for('skills') }}">Skills</a>
-                    {% endif %}
-                    {% if mng==None: %}
-                    <a href="{{ url_for('skills1') }}">My team</a>
-                    {% endif %}
+                <li >
+                    <a href="{{ url_for('adduser') }}">Add Employee</a>
                 </li>
-
-
-                <li style="background-color:white;color:hsla(197, 49%, 43%, 1);">
-                    <a href="#">Reset Password</a>
+                 <li>
+                    <a href="{{ url_for('updateuser') }}">Update Manager</a>
+                </li>
+                 <li style="background-color:white;color:hsla(197, 49%, 43%, 1);">
+                    <a href="#">Delete Employee</a>
+                </li>
+                 <li>
+                    <a href="{{ url_for('addskill') }}">Add New Skill</a>
+                </li>
+                 <li>
+                    <a href="{{ url_for('skillmatrix') }}">Skill Matrix</a>
                 </li>
             </ul>
         </nav>
@@ -78,7 +74,9 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item active">
-<a href="{{ url_for('logout') }}" class="btn btn-primary">Logout</a>                            </li>
+
+                               <a href="{{ url_for('logout') }}" class="btn btn-primary">Logout</a>
+                            </li>
 
 
                         </ul>
@@ -86,19 +84,15 @@
                 </div>
             </nav>
 
-
-<div class="container">
-	<div class="d-flex justify-content-center h-100">
-
-		<div class="card">
-			<div class="card-header">
-				<h3>Reset Password</h3>
-
-			</div>
-			<div class="card-body">
-				<form method="POST" action="" enctype="multipart/form-data">
+            <div class="card">
+                <div class="card-header">Delete Employee</div>
+                <div class="card-body">
+                <form method="POST" action="" autocomplete="off" enctype="multipart/form-data">
     				 {{ form.hidden_tag() }}
-                       {% with messages = get_flashed_messages(with_categories=true) %}
+                     <div class="row">
+                        <div class="col-md-3 col-sm-12"></div>
+                     <div class="col-md-6 col-sm-12">
+            {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
               {% for category, message in messages %}
                 <div class="alert alert-{{ category }}">
@@ -106,36 +100,32 @@
                 </div>
               {% endfor %}
             {% endif %}
-			{% endwith %}
-					<div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-key"></i></span>
-						</div>
-						{{form.old(class="form-control",placeholder="Old Password")}}
-					</div>
-					<div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-key"></i></span>
-						</div>
-						{{form.new(class="form-control",placeholder="New Password")}}
-					</div>
-                    <div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-key"></i></span>
-						</div>
-						{{form.cnew(class="form-control",placeholder="Confirm Password")}}
-					</div>
+                         {% endwith %}</div>
+                         <div class="col-md-3 col-sm-12"></div></div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12"></div>
+             <div class="col-md-4 col-sm-12">
+                  <div class="form-group">
+                 <label>Emp Id</label>
+                         {{ form.empid(class="form-control") }}
 
-					<div class="form-group">
-                        {{form.submit(class="btn float-right login_btn")}}
-					</div>
-				</form>
-			</div>
+          </div>
+        </div>
 
-			</div>
-		</div>
-		</div>
+        </div>
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
+
+                            </div>
+<div class="col-md-4" >
+{{ form.submit(class="btn btn-primary") }}
 </div>
+
+</div>
+                </form> </div> <!-- card-body -->
+        </div> <!-- card -->
+
     </div>
     </div>
 
@@ -164,3 +154,4 @@
 </body>
 
 </html>
+{% endif %}

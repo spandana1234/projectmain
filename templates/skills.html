@@ -1,5 +1,5 @@
 {% if 'user' in session %}
-<!DOCTYPE html>
+
 <html>
 
 <head>
@@ -34,7 +34,7 @@
            }
 
            tr:nth-child(even){background-color: #f2f2f2}
-           </style>
+</style>
 
 </head>
 
@@ -53,7 +53,7 @@
                      <a href="{{ url_for('dashboard') }}">Dashboard</a>
                     {% endif %}
                     {% if mng==None: %}
-                    <a href="{{ url_for('dashboard1') }}">Dashboard1</a>
+                    <a href="{{ url_for('dashboard1') }}">Dashboard</a>
                     {% endif %}
                 </li>
                 <li>
@@ -108,7 +108,7 @@
                       <div class="col-md-4 col-sm-12">
                           <div class="form-group">
                              <label>Skills</label>
-                            {{form.select1(class="form-control")}}
+                            {{form.select1(class="form-control pre-scrollable")}}
                         </div>
                       </div>
 
@@ -120,11 +120,14 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-2">
+
+                            </div>
+                            <div class="col-md-5">
                                    {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
               {% for category, message in messages %}
-                <div class="alert alert-{{ category }}">
+                <div class="alert alert-{{ category }}" style="text-align:center">
                   {{ message }}
                 </div>
               {% endfor %}
@@ -132,6 +135,7 @@
 			{% endwith %}
 
                             </div>
+                            <div class="col-md-1"></div>
 
                         <div class="col-md-4 col-sm-12">
                                  <div class="form-group">
@@ -175,7 +179,8 @@
 <!--                                                <button  id={{"edit_button"+loop.index|string}} class="btn btn-primary edit "   onclick="edit_row({{loop.index|string}})" value="{{y}}" name="x">Edit</button>-->
 <!--                                           <button id={{"save_button"+loop.index|string}} class="btn btn-primary "  onclick="save_row({{loop.index|string}})" value="{{y}}" name="z" style="display:none;">Save</button>-->
                                            <td>
-                                           <button value="{{y}}" class="btn btn-primary" name="dlt"  onclick="delete_row({{loop.index|string}})">Delete</button>
+                                           <button value="{{y}}" class="btn btn-outline-danger" name="dlt"  onclick="delete_row({{loop.index|string}})"><i class="fa fa-times" aria-hidden="true"></i>
+</button>
 
                                        </td>
                                        </tr>
@@ -185,7 +190,7 @@
                                        </tbody>
                        </table>
 
-                      <a href="{{ url_for('edit') }}"  class="btn btn-primary">Edit</a>
+                      <a href="{{ url_for('check') }}"  class="btn btn-primary">Edit</a>
 
                   </form>   </div>
                     </div>

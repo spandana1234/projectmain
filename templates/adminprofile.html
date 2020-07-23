@@ -68,8 +68,8 @@
       google.charts.setOnLoadCallback(drawDashboard);
       function drawDashboard() {
         // Create our data table.
-        var data2 = google.visualization.arrayToDataTable([
-         {% for key, value in data2.items() %}
+        var d2 = google.visualization.arrayToDataTable([
+         {% for key, value in d2.items() %}
             {% if value is string %}
                ['{{ key }}', '{{ value }}'],
             {% else %}
@@ -104,7 +104,7 @@
         // given the chosen slider range.
         dashboard.bind(donutRangeSlider, pieChart);
         // Draw the dashboard.
-        dashboard.draw(data2);
+        dashboard.draw(d2);
       }
     </script>
     <script type="text/javascript">
@@ -306,10 +306,20 @@
                 </li>
 
                 <li>
-                    <a href="{{ url_for('adduser') }}">Add user</a>
-
+                    <a href="{{ url_for('adduser') }}">Add Employee</a>
                 </li>
-
+                <li>
+                    <a href="{{ url_for('updateuser') }}">Update Manager</a>
+                </li>
+                 <li>
+                    <a href="{{ url_for('deleteuser') }}">Delete Employee</a>
+                </li>
+                  <li>
+                    <a href="{{ url_for('addskill') }}">Add New Skill</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('skillmatrix') }}">Skill Matrix</a>
+                </li>
 
             </ul>
         </nav>
@@ -496,6 +506,20 @@
 </div>
      </div>
                    </div>
+  <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#sidebar").mCustomScrollbar({
+                theme: "minimal"
+            });
+
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar, #content').toggleClass('active');
+                $('.collapse.in').toggleClass('in');
+                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+            });
+        });
+    </script>
 
 
   </body>

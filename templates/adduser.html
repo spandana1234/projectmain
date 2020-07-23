@@ -32,7 +32,7 @@
 
             <ul class="list-unstyled components">
                 <li>
-                    <a href="{{ url_for('search') }}">Dashboard</a>
+                    <a href="{{ url_for('adminprofile') }}">Dashboard</a>
 
                 </li>
 
@@ -40,7 +40,19 @@
                     <a href="{{ url_for('search') }}">Search</a>
                 </li>
                 <li style="background-color:white;color:hsla(197, 49%, 43%, 1);">
-                    <a href="#">Add User</a>
+                    <a href="#">Add Employee</a>
+                </li>
+                 <li>
+                    <a href="{{ url_for('updateuser') }}">Update Manager</a>
+                </li>
+                 <li>
+                    <a href="{{ url_for('deleteuser') }}">Delete Employee</a>
+                </li>
+                  <li>
+                    <a href="{{ url_for('addskill') }}">Add New Skill</a>
+                </li>
+                 <li>
+                    <a href="{{ url_for('skillmatrix') }}">Skill Matrix</a>
                 </li>
             </ul>
         </nav>
@@ -73,16 +85,29 @@
             </nav>
 
             <div class="card">
-                <div class="card-header">Personal Info</div>
+                <div class="card-header">Add Employee</div>
                 <div class="card-body">
-                <form method="POST" action="" autocomplete="off" enctype="multipart/form-data">
-    				 {{ form.hidden_tag() }}
+                <form method="POST" action="" autocomplete="off">
 
+                     <div class="row">
+                        <div class="col-md-3 col-sm-12"></div>
+                     <div class="col-md-6 col-sm-12">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+                         {% endwith %}</div>
+                         <div class="col-md-3 col-sm-12"></div></div>
                     <div class="row">
              <div class="col-md-4 col-sm-12">
                   <div class="form-group">
                  <label>Emp Id</label>
-                         {{ form.empid(class="form-control") }}
+                      	<input type="text" name="empid"  class="form-control">
+
 
           </div>
         </div>
@@ -90,7 +115,8 @@
         <div class="col-md-4 col-sm-12">
           <div class="form-group">
             <label>Password</label>
-             {{ form.password(class="form-control") }}
+              	<input type="password" name="password"  class="form-control">
+
 
           </div>
         </div>
@@ -98,13 +124,19 @@
         <div class="col-md-4  col-sm-12">
           <div class="form-group">
             <label>Manager Id</label>
-         {{form.manager(class="form-control")}}
+         <select name="mngid" class="form-control">
+        <option selected value='-'>None</option>
+             <option value='not_assigned'>Not Assigned</option>
+        {% for x in drop %}
+          <option value= '{{ x }}'>{{x}}</option>
+        {% endfor %}
+      </select>
 
 
           </div>
         </div></div>
 <div  style="text-align:right; width=100%;padding:0;">
-{{ form.submit(class="btn btn-primary") }}
+   <button type="submit" class="btn btn-primary">Add</button>
 
 </div>
 

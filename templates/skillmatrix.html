@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% if 'user' in session %}
 <html>
 
 <head>
@@ -6,13 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Resetpassword</title>
+    <title>skillmatrix</title>
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="http://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <link href="css/custom.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
 
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-    <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='login.css') }}">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
     <!-- Scrollbar Custom CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 
@@ -20,7 +29,26 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 
+<style type="text/css">
+            table {
+            border-collapse: collapse;
+             overflow-y:scroll
+
+             border-spacing: 0;
+             width: 100%;
+             border: 1px solid #ddd;
+           }
+
+           th, td {
+             text-align: center;
+             padding: 8px;
+           }
+
+           tr:nth-child(even){background-color: #f2f2f2}
+</style>
 </head>
+
+
 
 <body>
 
@@ -28,35 +56,32 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                             <a href="https://enquero.com/" target="_blank" ><img src="{{url_for('static',filename='enquero_logo.png')}}" style="width:190px;height:45px;" alt="img"></a>
+                              <a href="https://enquero.com/" target="_blank" ><img src="{{url_for('static',filename='enquero_logo.png')}}" style="width:190px;height:45px;" alt="img"></a>
             </div>
 
             <ul class="list-unstyled components">
                 <li>
-                  {% if mng!=None: %}
-                     <a href="{{ url_for('dashboard') }}">Dashboard</a>
-                    {% endif %}
-                    {% if mng==None: %}
-                    <a href="{{ url_for('dashboard1') }}">Dashboard</a>
-                    {% endif %}
+                    <a href="{{ url_for('adminprofile') }}">Dashboard</a>
 
                 </li>
+
                 <li>
-                    <a href="{{ url_for('profile1') }}">Edit Personal Info</a>
-
+                    <a href="{{ url_for('search') }}">Search</a>
                 </li>
-                <li>
-                     {% if mng!=None: %}
-                    <a href="{{ url_for('skills') }}">Skills</a>
-                    {% endif %}
-                    {% if mng==None: %}
-                    <a href="{{ url_for('skills1') }}">My team</a>
-                    {% endif %}
+                <li >
+                    <a href="{{ url_for('adduser') }}">Add Employee</a>
                 </li>
-
-
+                 <li>
+                    <a href="{{ url_for('updateuser') }}">Update Manager</a>
+                </li>
+                 <li >
+                    <a href="{{ url_for('deleteuser') }}">Delete Employee</a>
+                </li>
+                 <li>
+                    <a href="{{ url_for('addskill') }}">Add New Skill</a>
+                </li>
                 <li style="background-color:white;color:hsla(197, 49%, 43%, 1);">
-                    <a href="#">Reset Password</a>
+                    <a href="#">Skill Matrix</a>
                 </li>
             </ul>
         </nav>
@@ -78,7 +103,9 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item active">
-<a href="{{ url_for('logout') }}" class="btn btn-primary">Logout</a>                            </li>
+
+                               <a href="{{ url_for('logout') }}" class="btn btn-primary">Logout</a>
+                            </li>
 
 
                         </ul>
@@ -87,55 +114,27 @@
             </nav>
 
 
-<div class="container">
-	<div class="d-flex justify-content-center h-100">
+   <h4 style="text-align:center;">Skill Matrix</h4>
+            <br>
+    <table class="table  table-bordered sk table-fluid" id="myTable">
+        <thead>
+            <th>Empid</th>
+            {% for i in skill %}
+                <th>{{i}}</th>
+            {% endfor %}
+        </thead>
 
-		<div class="card">
-			<div class="card-header">
-				<h3>Reset Password</h3>
+        {% for row in l3 %}
+        <tr>
 
-			</div>
-			<div class="card-body">
-				<form method="POST" action="" enctype="multipart/form-data">
-    				 {{ form.hidden_tag() }}
-                       {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-              {% for category, message in messages %}
-                <div class="alert alert-{{ category }}">
-                  {{ message }}
-                </div>
-              {% endfor %}
-            {% endif %}
-			{% endwith %}
-					<div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-key"></i></span>
-						</div>
-						{{form.old(class="form-control",placeholder="Old Password")}}
-					</div>
-					<div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-key"></i></span>
-						</div>
-						{{form.new(class="form-control",placeholder="New Password")}}
-					</div>
-                    <div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-key"></i></span>
-						</div>
-						{{form.cnew(class="form-control",placeholder="Confirm Password")}}
-					</div>
+            {% for rat in row %}
+            <td>{{rat}}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
 
-					<div class="form-group">
-                        {{form.submit(class="btn float-right login_btn")}}
-					</div>
-				</form>
-			</div>
+    </table>
 
-			</div>
-		</div>
-		</div>
-</div>
     </div>
     </div>
 
@@ -148,8 +147,13 @@
     <!-- jQuery Custom Scroller CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
+     <script>
+
+</script>
     <script type="text/javascript">
+
         $(document).ready(function () {
+
             $("#sidebar").mCustomScrollbar({
                 theme: "minimal"
             });
@@ -159,8 +163,10 @@
                 $('.collapse.in').toggleClass('in');
                 $('a[aria-expanded=true]').attr('aria-expanded', 'false');
             });
+              $('#myTable').DataTable();
         });
     </script>
 </body>
 
 </html>
+{% endif %}

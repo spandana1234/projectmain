@@ -70,7 +70,7 @@
 
 			</div>
 			<div class="card-body">
-				<form method="POST" action="" enctype="multipart/form-data">
+				<form method="POST" action="" autocomplete="off" enctype="multipart/form-data">
     				 {{ form.hidden_tag() }}
 
      {% with messages = get_flashed_messages(with_categories=true) %}

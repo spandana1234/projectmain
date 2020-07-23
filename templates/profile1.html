@@ -87,7 +87,7 @@ function validate() {
                      <a href="{{ url_for('dashboard') }}">Dashboard</a>
                     {% endif %}
                     {% if mng==None: %}
-                    <a href="{{ url_for('dashboard1') }}">Dashboard1</a>
+                    <a href="{{ url_for('dashboard1') }}">Dashboard</a>
                     {% endif %}
                 </li>
                 <li style="background-color:white;color:hsla(197, 49%, 43%, 1);">
@@ -253,11 +253,25 @@ function validate() {
         </div>
 
                           </div>
+      <div class="row">
+          <div class="col-md-3">
+          </div>
+          <div class="col-md-6">
+                  {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}" style="text-align:center">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+			{% endwith %}
+          </div>
+        <div class="col-md-3">
 
-                          <div style="text-align:right; width=100%;padding:0;">
-			            <button type="submit" class="btn btn-primary">Update</button>
+			            <button style="float:right;" type="submit" class="btn btn-primary">Update</button>
 
-                          </div>
+          </div></div>
              </form>
         </div> <!-- card-body -->
         </div> <!-- card -->

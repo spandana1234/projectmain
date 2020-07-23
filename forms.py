@@ -1,6 +1,14 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, SelectField, DateField
 from wtforms.validators import DataRequired,Email,Length,EqualTo
+import pypyodbc
+
+connection1 = pypyodbc.connect(
+    "Driver={SQL Server};"
+    "Server=LAPTOP-PB290PQU;"
+    "Database=project;"
+    "Trusted_Connection=yes;"
+)
 
 
 class LoginForm(FlaskForm):
@@ -73,27 +81,41 @@ class ResetpassForm(FlaskForm):
 
 
 class SearchForm(FlaskForm):
-    skills=[('%','Select'),('Java','Java'),('Python','Python'),('C++','C++'),('Java Script','Java Script'),
-            ('SQL','SQL'),('c#','c#'),('Scala','Scala')]
-    skills1=SelectField(choices=skills)
+    s1 = ("SELECT skill, skill "
+               "FROM skill_list ")
+    cursor = connection1.cursor()
+    cursor.execute(s1)
+    name = cursor.fetchall()
+    result1 = [('%', 'Select')]
+    result1.extend(name)
+
+    skills1=SelectField(choices=result1)
+    fill = [('current', 'Current Employees'), ('old', 'Old Employees'),('both','Both')]
+    fil = SelectField(choices=fill)
     Exp=[('%','Select'),('1','1'),('2','2'),('3','3'),('4','4'),('5','5')]
     exp1=SelectField(choices=Exp)
-    rating= [('%','Select'),('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5')]
+    rating= [('0','Select'),('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5')]
     rating1 = SelectField(choices=rating)
-    practices=[('%','Select'),('Data Engineering','Data Engineering'),('Web developer','Web developer'),
-               ('Frontend Developer','Frontend Developer'),('Oracle','Oracle'),('Anaplan','Anaplan')]
+    practices=[('%','Select'),('DataEngineering','Data Engineering'),('Webdeveloper','Web developer'),
+               ('FrontendDeveloper','Frontend Developer'),('Oracle','Oracle'),('Anaplan','Anaplan')]
     practices1 = SelectField(choices=practices)
     loc=[('%','Select'),('Bangalore','Bangalore'),('Hyderabad','Hyderabad'),('USA','USA')]
     loc1 = SelectField(choices=loc)
-    proj=[('%','Select'),('Yes','Yes'),('No','No')]
+    proj = [('%','Select'),('Yes','Yes'),('No','No')]
     pro1=SelectField(choices=proj)
     search=SubmitField('Search')
 
 
 class SkillsForm(FlaskForm):
-    skills=[(None,None),('Java','Java'),('Python','Python'),('C++','C++'),('Java Script','Java Script'),
-            ('SQL','SQL'),('c#','c#'),('Scala','Scala')]
-    select1 = SelectField(choices=skills)
+    select1 = ("SELECT skill, skill "
+               "FROM skill_list ")
+    cursor = connection1.cursor()
+    cursor.execute(select1)
+    name = cursor.fetchall()
+    result1 = [('None', 'None')]
+    result1.extend(name)
+
+    select1 = SelectField(choices=result1)
     rating=[(None,None),('1','1'),('2','2'),('3','3'),('4','4'),('5','5')]
     select2 = SelectField(choices=rating)
     submit = SubmitField('Add')
@@ -115,8 +137,12 @@ class ProjectForm(FlaskForm):
     manager1=SelectField(choices=manager)
     search = SubmitField('Add')
 
-class AdminRegistrationForm(FlaskForm):
-    empid = StringField( validators=[DataRequired()])
-    password = PasswordField( validators=[DataRequired()])
-    manager = StringField( validators=[DataRequired()])
-    submit = SubmitField('Add User')
+
+class DeleteuserForm(FlaskForm):
+    empid = StringField(validators=[DataRequired()])
+    submit = SubmitField('Delete')
+
+
+class SkillForm(FlaskForm):
+    skill = StringField(validators=[DataRequired()])
+    submit = SubmitField('Add')

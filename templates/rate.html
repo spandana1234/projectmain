@@ -25,16 +25,18 @@
             table {
              border-collapse: collapse;
              border-spacing: 0;
-             width: 100%;
+             width:80%;
              border: 1px solid #ddd;
+             margin-left:10%;
+             margin-right:10%;
            }
 
            th, td {
-             text-align: left;
-             padding: 4px;
+             text-align: center;
+             padding: 8px;
            }
 
-            tr:nth-child(even){background-color: #f2f2f2}
+           tr:nth-child(even){background-color: #f2f2f2}
            </style>
 
 </head>
@@ -54,7 +56,7 @@
                      <a href="{{ url_for('dashboard') }}">Dashboard</a>
                     {% endif %}
                     {% if mng==None: %}
-                    <a href="{{ url_for('dashboard1') }}">Dashboard1</a>
+                    <a href="{{ url_for('dashboard1') }}">Dashboard</a>
                     {% endif %}
 
                 </li>
@@ -105,9 +107,9 @@
 
 
 
-                  <div >
+                  <div>
 
-                       <table class="table table-bordered">
+                       <table class="table-bordered">
                                    <thead>
                                       <tr>
                                            <th>Skill</th>
@@ -122,8 +124,8 @@
                                             {% set x= loop.index|string %}
                                            <td>{{row[0]}}</td>
                                            <td>{{row[2]}}</td>
-                                           <td>
-                                               <select  name="{{'rate'+x}}" class="form-control">
+                                           <td style="width:400px">
+                                               <select  name="{{'rate'+x}}" class="form-control" style="width:120px;margin-left:130px;">
                                                    <option value="None">-</option>
                                                    <option value="1" {% if row[1]==1%} selected="selected" {% endif %}>1</option>
                                                     <option value="2" {% if row[1]==2%} selected="selected" {% endif %}>2</option>
@@ -140,7 +142,8 @@
 
                                     </tbody>
                        </table>
-                        <button value="{{x}}" name="y" class="btn btn-primary">Save</button>
+
+                        <button value="{{x}}" name="y" class="btn btn-primary" style="margin-left:110px;margin-top:20px;">Save</button>
                      </div>
 
 
